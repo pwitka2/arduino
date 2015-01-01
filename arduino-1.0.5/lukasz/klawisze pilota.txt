@@ -1,0 +1,5 @@
+0x296DD2F7 - przód
+0xC4FFB646 - ty³
+0x53801EE8 - prawo
+0x64ECBA84 - lewo
+0x8AF13528 - stop
