@@ -12,23 +12,45 @@
 #define FALSE 0
 
 // Servo definitions
-#define SERVO_INITIAL_POS 30
+#define SERVO_POINT_ZERO 90
+#define SERVO_ANGLE_HIGH 75
+#define SERVO_ANGLE_LOW 45
+#define SERVO_POINT_RIGHT(ANGLE) (SERVO_POINT_ZERO - ANGLE)
+#define SERVO_POINT_LEFT(ANGLE) (SERVO_POINT_ZERO + ANGLE) 
 #define SERVO_STEP 15
 
 Servo myservo;  // create servo object to control a servo
 struct servoCtx_s 
 {
+  int running;
   int pos;
   int servoStep;
+  int angleRange;
 } servoCtx;
 
 // Sonar definitions
 #define SONAR_MAX_DISTANCE 500 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
-#define SONAR_DELAY_AFTER 5 // 30ms
-#define SONAR_READS_NO 5 // No of reads in one call 
-#define SONAR_TRESHOLD_DISTANCE 20 // 30 cm 
+#define SONAR_DELAY_AFTER 20 // 30ms
+#define SONAR_READS_NO 3 // No of reads in one call 
+#define SONAR_TRESHOLD_DISTANCE_DETECTION 20 // 30 cm 
+#define SONAR_TRESHOLD_DISTANCE_RELEASE 25 // 30 cm 
 
-int sonarDistance;
+//#define SERVO_NUMBER_OF_POSITIONS_ONE_SIDE ((SERVO_POINT_ZERO - SERVO_ANGLE_LOW) / SERVO_STEP ) + 1)
+#define SONAR_GET_ANGLE_FROM_SERVO(SERVO_POS) (90 - SERVO_POS)
+#define SONAR_INDEX_270 0
+#define SONAR_INDEX_315 1
+#define SONAR_INDEX_0 2
+#define SONAR_INDEX_45 3
+#define SONAR_INDEX_90 4
+#define SONAR_NO_OF_DISTANCES 5
+
+struct sonarCtx_s
+{
+  int sonarMinDistance;
+  int sonarMinDistanceDirectionIndex;
+  int sonarDistances[SONAR_NO_OF_DISTANCES];
+} sonarCtx;
+
 NewPing sonar(PIN_SONAR_TRIGGER, PIN_SONAR_ECHO, SONAR_MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
 // LCD definitions
@@ -47,15 +69,25 @@ decode_results irRawResults;
 // Motor Definitions
 #define MOTOR_DIRECTION_FORWARD LOW
 #define MOTOR_DIRECTION_BACKWARD HIGH
+
 #define MOTOR_DIRECTION_LEFT HIGH
 #define MOTOR_DIRECTION_RIGHT LOW
-#define MOTOR_SPEED 100
+
+#define MOTOR_SPEED_FAST 70
+#define MOTOR_SPEED_SLOW 45
+
+struct morotCtx_s
+{
+  int direction;
+} motorCtx;
 
 // Application globals
 enum state_s 
 {
   STATE_IDLE,
-  STATE_MOVING
+  STATE_MOVING,
+  STATE_IMPEDIMENT,
+  STATE_IMPEDIMENT_TURN
 } state;
 
 #define SIGNAL_IR_NO_SIGNAL 0x0
@@ -72,7 +104,7 @@ struct signals_s
 } signal;
 
 
-void motorForward(int motorSpeed, char motorDirection)
+void motorRun(int motorSpeed, char motorDirection)
 {
   digitalWrite(PIN_MOTOR_BREAK_A, LOW);
   digitalWrite(PIN_MOTOR_BREAK_B, LOW);
@@ -94,6 +126,7 @@ void motorForward(int motorSpeed, char motorDirection)
 
 void motorStop()
 {
+  Serial.println("Motor stop");
   digitalWrite(PIN_MOTOR_BREAK_A, HIGH);
   digitalWrite(PIN_MOTOR_BREAK_B, HIGH);
 }
@@ -125,16 +158,16 @@ void motorMoveOnSignal(int signal)
   switch(signal)
   {
     case SIGNAL_IR_FORWARD:
-      motorForward(MOTOR_SPEED, MOTOR_DIRECTION_FORWARD);
+      motorRun(MOTOR_SPEED_FAST, MOTOR_DIRECTION_FORWARD);
       break;
     case SIGNAL_IR_BACKWARD:
-      motorForward(MOTOR_SPEED, MOTOR_DIRECTION_BACKWARD);
+      motorRun(MOTOR_SPEED_FAST, MOTOR_DIRECTION_BACKWARD);
       break;
     case SIGNAL_IR_LEFT:
-      motorTurn(MOTOR_DIRECTION_LEFT, MOTOR_SPEED);
+      motorTurn(MOTOR_DIRECTION_LEFT, MOTOR_SPEED_FAST);
       break;
     case SIGNAL_IR_RIGHT:
-      motorTurn(MOTOR_DIRECTION_RIGHT, MOTOR_SPEED);
+      motorTurn(MOTOR_DIRECTION_RIGHT, MOTOR_SPEED_FAST);
       break;
     case SIGNAL_IR_STOP:
       motorStop();
@@ -145,41 +178,123 @@ void motorMoveOnSignal(int signal)
   }      
 };
 
-void motorRecoveryMove(void)
-{
-  motorStop();
-  motorForward(MOTOR_SPEED, MOTOR_DIRECTION_BACKWARD);
-  delay(1000);
-  motorTurn(MOTOR_DIRECTION_RIGHT, MOTOR_SPEED);
-  delay(1000);
-  motorStop();
-  motorForward(MOTOR_SPEED, MOTOR_DIRECTION_FORWARD);
-}
-
 void servoMove(struct servoCtx_s *ctx)
 {
-  if (ctx->pos == 135)
+  Serial.println(ctx->pos);
+  if (ctx->running == FALSE)
+  {
+    Serial.println("Servo not running");
+    return;
+  }    
+    
+  if (ctx->pos == SERVO_POINT_LEFT(ctx->angleRange))
   {
     ctx->servoStep = -SERVO_STEP;
-    //minDistance = 500;
   }
   
-  if (ctx->pos == 30)
+  if (ctx->pos == SERVO_POINT_RIGHT(ctx->angleRange))
   {
     ctx->servoStep = SERVO_STEP;
   }
+    
+  ctx->pos = ctx->pos+ctx->servoStep;
+  ctx->pos = max(ctx->pos, SERVO_POINT_RIGHT(ctx->angleRange)); 
+  ctx->pos = min(ctx->pos, SERVO_POINT_LEFT(ctx->angleRange));
   
-  myservo.write(ctx->pos);              // tell servo to go to position in variable 'pos'
-  
-  ctx->pos = ctx->pos+ctx->servoStep; 
+  myservo.write(ctx->pos);
 }
 
-int sonarDistanceGet(void)
+int getDirectionFromSonar(struct sonarCtx_s *ctx)
+{
+  if (ctx->sonarMinDistanceDirectionIndex >= 2)
+  {
+    return MOTOR_DIRECTION_RIGHT;
+  }  
+  
+  return MOTOR_DIRECTION_LEFT;
+}
+
+static int sonarDistanceGet(void)
 {
   unsigned int pingTime = sonar.ping_median(SONAR_READS_NO); // Send ping, get ping time in microseconds (uS).
   unsigned int distance = pingTime / US_ROUNDTRIP_CM;  
+  if (distance == 0)
+  {
+    distance = SONAR_MAX_DISTANCE;
+  }
   delay(SONAR_DELAY_AFTER);                      // Wait 50ms between pings (about 20 pings/sec). 29ms should be the shortest delay between pings.
   return distance;
+}
+
+static int sonarGetIndexFromAngle(float angle)
+{
+  int index;
+  
+  if (angle >= 0)
+  {
+    if (angle < (45.0/2))
+    {
+      index = SONAR_INDEX_0;
+    }
+    else if ((angle <= 45) || (angle <= (90.0 - 45.0/2)))
+    {
+      index = SONAR_INDEX_45;
+    }
+    else
+    {
+      index = SONAR_INDEX_90;
+    }
+  }
+  else // angle < 0
+  {
+    if (angle > (-45.0/2))
+    {
+      index = SONAR_INDEX_0;
+    }
+    else if ((angle >= -45) || (angle >= (-90.0 + 45.0/2)))
+    {
+      index = SONAR_INDEX_315;
+    }
+    else
+    {
+      index = SONAR_INDEX_270;
+    }
+  }
+  return index;
+}
+
+static void sonarPrintDistances(void)
+{
+  Serial.print("270 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_270]);
+  Serial.print("315 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_315]);
+  Serial.print("0 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_0]);
+  Serial.print("45 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_45]);
+  Serial.print("90 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_90]);
+  Serial.print("Min distance = "); Serial.println(sonarCtx.sonarMinDistance);
+}
+
+void sonarDistanceUpdate(int servoPos)
+{
+  int angle = SONAR_GET_ANGLE_FROM_SERVO(servoPos);
+  int index;
+  
+  index = sonarGetIndexFromAngle(angle);
+  
+  sonarCtx.sonarDistances[index] = sonarDistanceGet();
+  
+  // Update Min Distance
+  sonarCtx.sonarMinDistance = SONAR_MAX_DISTANCE;
+  
+  for (int i = 0; i < SONAR_NO_OF_DISTANCES; i++)
+  {
+    if (sonarCtx.sonarDistances[i] < sonarCtx.sonarMinDistance)
+    {
+      sonarCtx.sonarMinDistance = sonarCtx.sonarDistances[i];
+      sonarCtx.sonarMinDistanceDirectionIndex = i;
+    }
+  }
+  
+  sonarPrintDistances();
 }
 
 void lcdPrint(void)
@@ -187,7 +302,7 @@ void lcdPrint(void)
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Current: ");
-  lcd.print(sonarDistance );
+  lcd.print(sonarCtx.sonarMinDistance );
 }
 
 void irDecodeResults(decode_results results)
@@ -214,7 +329,9 @@ void irDecodeResults(decode_results results)
 
 void setup()
 {
-  // Ustawienie kierunku wyjść cyfrowych
+   Serial.begin(9600);
+   
+  // Motor setup
   pinMode(PIN_MOTOR_DIRECTION_A, OUTPUT);
   pinMode(PIN_MOTOR_SPEED_A, OUTPUT);
   pinMode(PIN_MOTOR_BREAK_A, OUTPUT);
@@ -223,19 +340,28 @@ void setup()
   pinMode(PIN_MOTOR_SPEED_B, OUTPUT);
   pinMode(PIN_MOTOR_BREAK_B, OUTPUT);
   
-  // Włączenie hamulca
   digitalWrite(PIN_MOTOR_BREAK_A, HIGH);
   digitalWrite(PIN_MOTOR_BREAK_B, HIGH);
   
+  // IR setup
   irrecv.enableIRIn();
   
   // Wybór rodzaju wyświetlacza  - 16x2
   lcd.begin(16, 2);
   
   // Servo setup
-  servoCtx.pos = SERVO_INITIAL_POS;
+  servoCtx.pos = SERVO_POINT_ZERO;
   servoCtx.servoStep = SERVO_STEP;
+  servoCtx.running = TRUE;
+  servoCtx.angleRange = SERVO_ANGLE_LOW;
   myservo.attach(PIN_SERVO);
+  
+  // Sonar setup
+  for (int i = 0 ; i < SONAR_NO_OF_DISTANCES ; i++)
+  {
+    sonarCtx.sonarDistances[i] = SONAR_MAX_DISTANCE;
+  }
+  sonarCtx.sonarMinDistance = SONAR_MAX_DISTANCE;
   
   // Application setup
   state = STATE_IDLE;
@@ -249,8 +375,9 @@ void loop()
   // static unsigned minDistance = 500;
   
   servoMove(&servoCtx);
-  sonarDistance = sonarDistanceGet();
-  if (sonarDistance < SONAR_TRESHOLD_DISTANCE)
+  sonarDistanceUpdate(servoCtx.pos);
+  
+  if (sonarCtx.sonarMinDistance < SONAR_TRESHOLD_DISTANCE_DETECTION)
   {
     signal.sonarSignal = TRUE;
   }
@@ -262,7 +389,9 @@ void loop()
     irDecodeResults(irRawResults);
     irrecv.resume();
   }  
-    
+  
+  //Serial.println(state);
+  
   switch(state)
   {
     case STATE_IDLE:
@@ -272,6 +401,7 @@ void loop()
         if (signal.irSignals != SIGNAL_IR_STOP)
         {
           state = STATE_MOVING;
+          servoCtx.running = TRUE;
         }
         signal.irSignals = SIGNAL_IR_NO_SIGNAL;          
       }
@@ -280,8 +410,9 @@ void loop()
     case STATE_MOVING:
       if(signal.sonarSignal == TRUE)
       {
-        motorRecoveryMove();
-        signal.sonarSignal = FALSE;
+        motorStop();
+        state = STATE_IMPEDIMENT;
+        //signal.sonarSignal = FALSE;
         signal.irSignals = SIGNAL_IR_NO_SIGNAL;
       }      
       else if (signal.irSignals)
@@ -290,8 +421,32 @@ void loop()
         if (signal.irSignals == SIGNAL_IR_STOP)
         {
           state = STATE_IDLE;
+          servoCtx.running = FALSE;
         }
         signal.irSignals = SIGNAL_IR_NO_SIGNAL;          
+      }
+      break;
+    case STATE_IMPEDIMENT:
+       //servoCtx.running = FALSE;
+       
+       motorRun(MOTOR_SPEED_SLOW, MOTOR_DIRECTION_BACKWARD);
+       delay(300);
+       motorStop();
+       motorTurn(getDirectionFromSonar(&sonarCtx), MOTOR_SPEED_SLOW);
+   
+       servoCtx.angleRange = SERVO_ANGLE_HIGH;
+       state = STATE_IMPEDIMENT_TURN;
+       break;
+       
+    case STATE_IMPEDIMENT_TURN:
+      if (sonarCtx.sonarMinDistance > SONAR_TRESHOLD_DISTANCE_RELEASE)
+      {
+        state = STATE_MOVING;
+        signal.sonarSignal = FALSE;
+        //servoCtx.running = TRUE;
+        servoCtx.angleRange = SERVO_ANGLE_LOW;
+        motorStop();
+        motorRun(MOTOR_SPEED_FAST, MOTOR_DIRECTION_FORWARD);
       }
       break; 
   }

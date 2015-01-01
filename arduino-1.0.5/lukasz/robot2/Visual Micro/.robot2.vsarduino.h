@@ -16,21 +16,24 @@
 #define __AVR__
 extern "C" void __cxa_pure_virtual() {;}
 
-void motorForward(int motorSpeed, char motorDirection);
+void motorRun(int motorSpeed, char motorDirection);
 void motorStop();
 void motorTurn(int motorDirection, int motorSpeed);
 void motorMoveOnSignal(int signal);
-void motorRecoveryMove(void);
 void servoMove(struct servoCtx_s *ctx);
-int sonarDistanceGet(void);
+int getDirectionFromSonar(struct sonarCtx_s *ctx);
+static int sonarDistanceGet(void);
+static int sonarGetIndexFromAngle(float angle);
+static void sonarPrintDistances(void);
+void sonarDistanceUpdate(int servoPos);
 void lcdPrint(void);
 void irDecodeResults(decode_results results);
 //
 //
 
-#include "c:\development\arduino-1.0.5\hardware\arduino\variants\leonardo\pins_arduino.h" 
-#include "c:\development\arduino-1.0.5\hardware\arduino\cores\arduino\arduino.h"
-#include "C:\development\arduino-1.0.5\lukasz\robot2\robot2.ino"
-#include "C:\development\arduino-1.0.5\lukasz\robot2\Motor.cpp"
-#include "C:\development\arduino-1.0.5\lukasz\robot2\Motor.h"
-#include "C:\development\arduino-1.0.5\lukasz\robot2\PinSetup.h"
+#include "c:\development\arduino\arduino-1.0.5\hardware\arduino\variants\leonardo\pins_arduino.h" 
+#include "c:\development\arduino\arduino-1.0.5\hardware\arduino\cores\arduino\arduino.h"
+#include "C:\development\arduino\arduino-1.0.5\lukasz\robot2\robot2.ino"
+#include "C:\development\arduino\arduino-1.0.5\lukasz\robot2\Motor.cpp"
+#include "C:\development\arduino\arduino-1.0.5\lukasz\robot2\Motor.h"
+#include "C:\development\arduino\arduino-1.0.5\lukasz\robot2\PinSetup.h"

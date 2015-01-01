@@ -63,26 +63,26 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value></Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -105,26 +105,26 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value></Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
@@ -140,7 +140,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino;c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo;c:/development/arduino-1.0.5/libraries/IRremote;c:/development/arduino-1.0.5/libraries/IRremote/utility;c:/development/arduino-1.0.5/libraries;c:/development/arduino-1.0.5/hardware/arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/pwitka/Documents/Arduino/libraries;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/;;C:/Users/pwitka/Documents/Arduino/libraries/Voltage;C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility;c:/development/arduino-1.0.5/libraries/LiquidCrystal;c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility;C:/Users/pwitka/Documents/Arduino/libraries/NewPing;C:/Users/pwitka/Documents/Arduino/libraries/NewPing/utility;c:/development/arduino-1.0.5/libraries/Servo;c:/development/arduino-1.0.5/libraries/Servo/utility;c:/development/arduino-1.0.5/libraries/NewPing;c:/development/arduino-1.0.5/libraries/NewPing/utility;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino;c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo;c:/development/arduino-1.0.5/libraries/IRremote;c:/development/arduino-1.0.5/libraries/IRremote/utility;c:/development/arduino-1.0.5/libraries;c:/development/arduino-1.0.5/hardware/arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/pwitka/Documents/Arduino/libraries;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/;;C:/Users/pwitka/Documents/Arduino/libraries/Voltage;C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility;c:/development/arduino-1.0.5/libraries/LiquidCrystal;c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility;C:/Users/pwitka/Documents/Arduino/libraries/NewPing;C:/Users/pwitka/Documents/Arduino/libraries/NewPing/utility;c:/development/arduino-1.0.5/libraries/Servo;c:/development/arduino-1.0.5/libraries/Servo/utility;c:/development/arduino-1.0.5/libraries/NewPing;c:/development/arduino-1.0.5/libraries/NewPing/utility;c:/development/arduino/arduino-1.0.5/hardware/arduino/cores/arduino;c:/development/arduino/arduino-1.0.5/hardware/arduino/variants/leonardo;c:/development/arduino/arduino-1.0.5/libraries/NewPing;c:/development/arduino/arduino-1.0.5/libraries/NewPing/utility;c:/development/arduino/arduino-1.0.5/libraries/IRremote;c:/development/arduino/arduino-1.0.5/libraries/IRremote/utility;c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal;c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal/utility;c:/development/arduino/arduino-1.0.5/libraries/Servo;c:/development/arduino/arduino-1.0.5/libraries/Servo/utility;c:/development/arduino/arduino-1.0.5/libraries;c:/development/arduino/arduino-1.0.5/hardware/arduino/libraries;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/avr/;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <arduino.upload.port>COM32</arduino.upload.port>
@@ -170,26 +170,26 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value></Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -212,26 +212,26 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value></Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries</Value>
       <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/Servo</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/LiquidCrystal</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/Servo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility</Value>
       <Value>C:/Users/pwitka/Documents/Arduino/libraries/Voltage</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/IRremote</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing/utility</Value>
-      <Value>c:/development/arduino-1.0.5/libraries/NewPing</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
-      <Value>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/IRremote</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing/utility</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/libraries/NewPing</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/variants/leonardo</Value>
+      <Value>c:/development/arduino/arduino-1.0.5/hardware/arduino/cores/arduino</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
@@ -247,7 +247,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino;c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo;c:/development/arduino-1.0.5/libraries/IRremote;c:/development/arduino-1.0.5/libraries/IRremote/utility;c:/development/arduino-1.0.5/libraries;c:/development/arduino-1.0.5/hardware/arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/pwitka/Documents/Arduino/libraries;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/;;C:/Users/pwitka/Documents/Arduino/libraries/Voltage;C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility;c:/development/arduino-1.0.5/libraries/LiquidCrystal;c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility;C:/Users/pwitka/Documents/Arduino/libraries/NewPing;C:/Users/pwitka/Documents/Arduino/libraries/NewPing/utility;c:/development/arduino-1.0.5/libraries/Servo;c:/development/arduino-1.0.5/libraries/Servo/utility;c:/development/arduino-1.0.5/libraries/NewPing;c:/development/arduino-1.0.5/libraries/NewPing/utility;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>c:/development/arduino-1.0.5/hardware/arduino/cores/arduino;c:/development/arduino-1.0.5/hardware/arduino/variants/leonardo;c:/development/arduino-1.0.5/libraries/IRremote;c:/development/arduino-1.0.5/libraries/IRremote/utility;c:/development/arduino-1.0.5/libraries;c:/development/arduino-1.0.5/hardware/arduino/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/pwitka/Documents/Arduino/libraries;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/include/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/avr/;c:/development/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/;;C:/Users/pwitka/Documents/Arduino/libraries/Voltage;C:/Users/pwitka/Documents/Arduino/libraries/Voltage/utility;c:/development/arduino-1.0.5/libraries/LiquidCrystal;c:/development/arduino-1.0.5/libraries/LiquidCrystal/utility;C:/Users/pwitka/Documents/Arduino/libraries/NewPing;C:/Users/pwitka/Documents/Arduino/libraries/NewPing/utility;c:/development/arduino-1.0.5/libraries/Servo;c:/development/arduino-1.0.5/libraries/Servo/utility;c:/development/arduino-1.0.5/libraries/NewPing;c:/development/arduino-1.0.5/libraries/NewPing/utility;c:/development/arduino/arduino-1.0.5/hardware/arduino/cores/arduino;c:/development/arduino/arduino-1.0.5/hardware/arduino/variants/leonardo;c:/development/arduino/arduino-1.0.5/libraries/NewPing;c:/development/arduino/arduino-1.0.5/libraries/NewPing/utility;c:/development/arduino/arduino-1.0.5/libraries/IRremote;c:/development/arduino/arduino-1.0.5/libraries/IRremote/utility;c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal;c:/development/arduino/arduino-1.0.5/libraries/LiquidCrystal/utility;c:/development/arduino/arduino-1.0.5/libraries/Servo;c:/development/arduino/arduino-1.0.5/libraries/Servo/utility;c:/development/arduino/arduino-1.0.5/libraries;c:/development/arduino/arduino-1.0.5/hardware/arduino/libraries;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/include/avr/;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/avr/;c:/development/arduino/arduino-1.0.5/hardware/tools/avr/lib/gcc/avr/4.3.2/include/;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <arduino.upload.port>COM32</arduino.upload.port>
