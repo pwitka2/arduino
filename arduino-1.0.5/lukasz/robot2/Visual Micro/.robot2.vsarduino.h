@@ -21,11 +21,11 @@ void motorStop();
 void motorTurn(int motorDirection, int motorSpeed);
 void motorMoveOnSignal(int signal);
 void servoMove(struct servoCtx_s *ctx);
-int getDirectionFromSonar(struct sonarCtx_s *ctx);
-static int sonarDistanceGet(void);
+static int sonarDistanceGet(int readTimes);
 static int sonarGetIndexFromAngle(float angle);
 static void sonarPrintDistances(void);
 void sonarDistanceUpdate(int servoPos);
+int getDirectionFromSonar(struct sonarCtx_s *ctx);
 void lcdPrint(void);
 void irDecodeResults(decode_results results);
 //

@@ -13,8 +13,8 @@
 
 // Servo definitions
 #define SERVO_POINT_ZERO 90
-#define SERVO_ANGLE_HIGH 75
-#define SERVO_ANGLE_LOW 45
+#define SERVO_ANGLE_HIGH 90
+#define SERVO_ANGLE_LOW 40
 #define SERVO_POINT_RIGHT(ANGLE) (SERVO_POINT_ZERO - ANGLE)
 #define SERVO_POINT_LEFT(ANGLE) (SERVO_POINT_ZERO + ANGLE) 
 #define SERVO_STEP 15
@@ -29,20 +29,24 @@ struct servoCtx_s
 } servoCtx;
 
 // Sonar definitions
-#define SONAR_MAX_DISTANCE 500 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
-#define SONAR_DELAY_AFTER 20 // 30ms
-#define SONAR_READS_NO 3 // No of reads in one call 
-#define SONAR_TRESHOLD_DISTANCE_DETECTION 20 // 30 cm 
-#define SONAR_TRESHOLD_DISTANCE_RELEASE 25 // 30 cm 
+#define SONAR_MAX_DISTANCE 200 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
+#define SONAR_DELAY_AFTER 40 // 30ms
+#define SONAR_READS_NO_NORMAL 1 // No of reads in one call
+#define SONAR_READS_NO_HIGH 3 
+#define SONAR_TRESHOLD_DISTANCE_DETECTION 15 // 30 cm 
+#define SONAR_TRESHOLD_DISTANCE_RELEASE 20 // 30 cm 
 
 //#define SERVO_NUMBER_OF_POSITIONS_ONE_SIDE ((SERVO_POINT_ZERO - SERVO_ANGLE_LOW) / SERVO_STEP ) + 1)
 #define SONAR_GET_ANGLE_FROM_SERVO(SERVO_POS) (90 - SERVO_POS)
+
 #define SONAR_INDEX_270 0
 #define SONAR_INDEX_315 1
-#define SONAR_INDEX_0 2
-#define SONAR_INDEX_45 3
-#define SONAR_INDEX_90 4
-#define SONAR_NO_OF_DISTANCES 5
+#define SONAR_INDEX_0_MINUS 2
+#define SONAR_INDEX_0_PLUS 3
+#define SONAR_INDEX_45 4
+#define SONAR_INDEX_90 5
+
+#define SONAR_NO_OF_DISTANCES 6
 
 struct sonarCtx_s
 {
@@ -74,7 +78,7 @@ decode_results irRawResults;
 #define MOTOR_DIRECTION_RIGHT LOW
 
 #define MOTOR_SPEED_FAST 70
-#define MOTOR_SPEED_SLOW 45
+#define MOTOR_SPEED_SLOW 55
 
 struct morotCtx_s
 {
@@ -204,19 +208,9 @@ void servoMove(struct servoCtx_s *ctx)
   myservo.write(ctx->pos);
 }
 
-int getDirectionFromSonar(struct sonarCtx_s *ctx)
+static int sonarDistanceGet(int readTimes)
 {
-  if (ctx->sonarMinDistanceDirectionIndex >= 2)
-  {
-    return MOTOR_DIRECTION_RIGHT;
-  }  
-  
-  return MOTOR_DIRECTION_LEFT;
-}
-
-static int sonarDistanceGet(void)
-{
-  unsigned int pingTime = sonar.ping_median(SONAR_READS_NO); // Send ping, get ping time in microseconds (uS).
+  unsigned int pingTime = sonar.ping_median(readTimes); // Send ping, get ping time in microseconds (uS).
   unsigned int distance = pingTime / US_ROUNDTRIP_CM;  
   if (distance == 0)
   {
@@ -234,7 +228,7 @@ static int sonarGetIndexFromAngle(float angle)
   {
     if (angle < (45.0/2))
     {
-      index = SONAR_INDEX_0;
+      index = SONAR_INDEX_0_PLUS;
     }
     else if ((angle <= 45) || (angle <= (90.0 - 45.0/2)))
     {
@@ -249,7 +243,7 @@ static int sonarGetIndexFromAngle(float angle)
   {
     if (angle > (-45.0/2))
     {
-      index = SONAR_INDEX_0;
+      index = SONAR_INDEX_0_MINUS;
     }
     else if ((angle >= -45) || (angle >= (-90.0 + 45.0/2)))
     {
@@ -267,7 +261,8 @@ static void sonarPrintDistances(void)
 {
   Serial.print("270 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_270]);
   Serial.print("315 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_315]);
-  Serial.print("0 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_0]);
+  Serial.print("0- = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_0_MINUS]);
+  Serial.print("0+ = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_0_PLUS]);
   Serial.print("45 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_45]);
   Serial.print("90 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_90]);
   Serial.print("Min distance = "); Serial.println(sonarCtx.sonarMinDistance);
@@ -277,10 +272,18 @@ void sonarDistanceUpdate(int servoPos)
 {
   int angle = SONAR_GET_ANGLE_FROM_SERVO(servoPos);
   int index;
+  int distance;
   
   index = sonarGetIndexFromAngle(angle);
   
-  sonarCtx.sonarDistances[index] = sonarDistanceGet();
+  distance = sonarDistanceGet(SONAR_READS_NO_NORMAL);
+  
+  if (distance < SONAR_TRESHOLD_DISTANCE_DETECTION)
+  {
+    distance = sonarDistanceGet(SONAR_READS_NO_HIGH);
+  }
+  
+  sonarCtx.sonarDistances[index] = distance;
   
   // Update Min Distance
   sonarCtx.sonarMinDistance = SONAR_MAX_DISTANCE;
@@ -295,6 +298,16 @@ void sonarDistanceUpdate(int servoPos)
   }
   
   sonarPrintDistances();
+}
+
+int getDirectionFromSonar(struct sonarCtx_s *ctx)
+{
+  if (ctx->sonarMinDistanceDirectionIndex <= SONAR_INDEX_0_MINUS)
+  {
+    return MOTOR_DIRECTION_LEFT;
+  }
+  
+  return MOTOR_DIRECTION_RIGHT;
 }
 
 void lcdPrint(void)
@@ -352,7 +365,7 @@ void setup()
   // Servo setup
   servoCtx.pos = SERVO_POINT_ZERO;
   servoCtx.servoStep = SERVO_STEP;
-  servoCtx.running = TRUE;
+  servoCtx.running = FALSE;
   servoCtx.angleRange = SERVO_ANGLE_LOW;
   myservo.attach(PIN_SERVO);
   
@@ -373,8 +386,8 @@ void loop()
 {
   //    long voltage;
   // static unsigned minDistance = 500;
-  
-  servoMove(&servoCtx);
+
+  servoMove(&servoCtx);  
   sonarDistanceUpdate(servoCtx.pos);
   
   if (sonarCtx.sonarMinDistance < SONAR_TRESHOLD_DISTANCE_DETECTION)
@@ -403,7 +416,8 @@ void loop()
           state = STATE_MOVING;
           servoCtx.running = TRUE;
         }
-        signal.irSignals = SIGNAL_IR_NO_SIGNAL;          
+        signal.irSignals = SIGNAL_IR_NO_SIGNAL;
+        signal.sonarSignal = FALSE;
       }
       break;
       
