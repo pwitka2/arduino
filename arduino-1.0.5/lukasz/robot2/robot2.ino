@@ -29,7 +29,7 @@ struct servoCtx_s
 } servoCtx;
 
 // Sonar definitions
-#define SONAR_MAX_DISTANCE 200 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
+#define SONAR_MAX_DISTANCE 400 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
 #define SONAR_DELAY_AFTER 40 // 30ms
 #define SONAR_READS_NO_NORMAL 1 // No of reads in one call
 #define SONAR_READS_NO_HIGH 3 
@@ -184,10 +184,10 @@ void motorMoveOnSignal(int signal)
 
 void servoMove(struct servoCtx_s *ctx)
 {
-  Serial.println(ctx->pos);
+  //Serial.println(ctx->pos);
   if (ctx->running == FALSE)
   {
-    Serial.println("Servo not running");
+    //Serial.println("Servo not running");
     return;
   }    
     
@@ -259,13 +259,16 @@ static int sonarGetIndexFromAngle(float angle)
 
 static void sonarPrintDistances(void)
 {
+  /*
   Serial.print("270 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_270]);
   Serial.print("315 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_315]);
   Serial.print("0- = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_0_MINUS]);
   Serial.print("0+ = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_0_PLUS]);
   Serial.print("45 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_45]);
   Serial.print("90 = "); Serial.println(sonarCtx.sonarDistances[SONAR_INDEX_90]);
-  Serial.print("Min distance = "); Serial.println(sonarCtx.sonarMinDistance);
+  */
+  
+  //Serial.print("Min distance = "); Serial.println(sonarCtx.sonarMinDistance);
 }
 
 void sonarDistanceUpdate(int servoPos)
@@ -342,7 +345,11 @@ void irDecodeResults(decode_results results)
 
 void setup()
 {
-   Serial.begin(9600);
+  // Enable pull up resistors for unused analog inputs
+  pinMode(A0, INPUT_PULLUP);
+  pinMode(A1, INPUT_PULLUP);
+  
+  Serial.begin(9600);
    
   // Motor setup
   pinMode(PIN_MOTOR_DIRECTION_A, OUTPUT);
@@ -380,13 +387,45 @@ void setup()
   state = STATE_IDLE;
   signal.irSignals = SIGNAL_IR_NO_SIGNAL;
   signal.sonarSignal = FALSE;
+  
+  //=========================
+  //myservo.detach();
+  
+  //pinMode(7, OUTPUT);
+  //pinMode(6, INPUT);
 }
 
 void loop()
 {
-  //    long voltage;
+  static long minVoltage = 10000;
+  static long voltage;
   // static unsigned minDistance = 500;
-
+  /*digitalWrite(7, LOW);
+  delay(2);
+  digitalWrite(7, HIGH);
+  delay(10);
+  digitalWrite(7, LOW);
+  
+  static int iii=0;
+  unsigned long pulse;
+  
+  pulse = pulseIn(6, HIGH);
+  if (pulse > 0)
+  {
+    iii = pulse;
+  }
+  Serial.print(iii);
+  Serial.print(" ");
+  */
+  
+  delay(30);
+  voltage = readVcc();
+  if (voltage < minVoltage)
+  {
+    minVoltage = voltage;
+  }
+  Serial.print("Voltage "); Serial.print(voltage); Serial.print(" "); Serial.println(minVoltage);
+  
   servoMove(&servoCtx);  
   sonarDistanceUpdate(servoCtx.pos);
   
@@ -403,7 +442,7 @@ void loop()
     irrecv.resume();
   }  
   
-  //Serial.println(state);
+  Serial.println(state);
   
   switch(state)
   {

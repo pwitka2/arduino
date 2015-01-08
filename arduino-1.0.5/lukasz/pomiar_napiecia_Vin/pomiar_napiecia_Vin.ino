@@ -28,6 +28,8 @@ long readVcc() {
 void setup() {
   // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
+  //pinMode(6, INPUT);
+  pinMode(5, OUTPUT);
 }
 
 // the loop routine runs over and over again forever:
