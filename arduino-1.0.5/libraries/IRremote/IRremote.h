@@ -50,6 +50,10 @@ public:
 // Decoded value for NEC when a repeat code is received
 #define REPEAT 0xffffffff
 
+#if !defined (IRREMOTE_USE_TIMER)
+typedef void(*IRremoteHandlerFunc)(void);
+#endif
+
 // main class for receiving IR
 class IRrecv
 {
@@ -57,7 +61,11 @@ public:
   IRrecv(int recvpin);
   void blink13(int blinkflag);
   int decode(decode_results *results);
+#if defined (IRREMOTE_USE_TIMER)
   void enableIRIn();
+#else
+  IRremoteHandlerFunc enableIRIn();
+#endif
   void resume();
 private:
   // These are called by decode
@@ -73,7 +81,7 @@ private:
   long decodeHash(decode_results *results);
   int compare(unsigned int oldval, unsigned int newval);
 
-} 
+}
 ;
 
 // Only used for testing; can remove virtual for shorter code

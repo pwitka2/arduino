@@ -195,6 +195,21 @@ vm.boardsource.path=c:\development\arduino\arduino-1.0.5\hardware\arduino
 runtime.platform.path=c:\development\arduino\arduino-1.0.5\hardware\arduino
 vm.platformname.name=avr
 build.arch=AVR
+vm.runtime.compiler.showwarnings=true
+serial.port.file=COM16
+serial.port=COM16
+compiler.path=c:\development\arduino\arduino-1.0.5\hardware\tools\avr\bin\
+includes= -I"c:\development\arduino\arduino-1.0.5\hardware\arduino\cores\arduino"  -I"c:\development\arduino\arduino-1.0.5\hardware\arduino\variants\standard"  -I"c:\development\arduino\arduino-1.0.5\libraries\IRremote"  -I"c:\development\arduino\arduino-1.0.5\libraries"  -I"c:\development\arduino\arduino-1.0.5\hardware\arduino\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"C:\Users\pwitka\Documents\Arduino\libraries" 
+build.path=C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno
+build.project_name=pilot1
+build.variant.path=c:\development\arduino\arduino-1.0.5\hardware\arduino\variants\standard
+archive_file=core.a
+object_file=C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno\IRremote\IRremote.cpp.o
+source_file=c:\development\arduino\arduino-1.0.5\libraries\IRremote\IRremote.cpp
+object_files="C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno\pilot1.cpp.o" "C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno\IRremote\IRremote.cpp.o" 
+build.architecture=avr
+vmresolved.compiler.path=c:\development\arduino\arduino-1.0.5\hardware\tools\avr\bin\
+vmresolved.tools.path=c:\development\arduino\arduino-1.0.5\hardware\tools\avr
 </arduino.board.property_bag>
         <arduino.build.mcu>atmega328p</arduino.build.mcu>
         <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>
@@ -363,6 +378,21 @@ vm.boardsource.path=c:\development\arduino\arduino-1.0.5\hardware\arduino
 runtime.platform.path=c:\development\arduino\arduino-1.0.5\hardware\arduino
 vm.platformname.name=avr
 build.arch=AVR
+vm.runtime.compiler.showwarnings=true
+serial.port.file=COM16
+serial.port=COM16
+compiler.path=c:\development\arduino\arduino-1.0.5\hardware\tools\avr\bin\
+includes= -I"c:\development\arduino\arduino-1.0.5\hardware\arduino\cores\arduino"  -I"c:\development\arduino\arduino-1.0.5\hardware\arduino\variants\standard"  -I"c:\development\arduino\arduino-1.0.5\libraries\IRremote"  -I"c:\development\arduino\arduino-1.0.5\libraries"  -I"c:\development\arduino\arduino-1.0.5\hardware\arduino\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"C:\Users\pwitka\Documents\Arduino\libraries" 
+build.path=C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno
+build.project_name=pilot1
+build.variant.path=c:\development\arduino\arduino-1.0.5\hardware\arduino\variants\standard
+archive_file=core.a
+object_file=C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno\IRremote\IRremote.cpp.o
+source_file=c:\development\arduino\arduino-1.0.5\libraries\IRremote\IRremote.cpp
+object_files="C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno\pilot1.cpp.o" "C:\Users\pwitka\AppData\Local\VMicro\Arduino\Builds\pilot1\uno\IRremote\IRremote.cpp.o" 
+build.architecture=avr
+vmresolved.compiler.path=c:\development\arduino\arduino-1.0.5\hardware\tools\avr\bin\
+vmresolved.tools.path=c:\development\arduino\arduino-1.0.5\hardware\tools\avr
 </arduino.board.property_bag>
         <arduino.build.mcu>atmega328p</arduino.build.mcu>
         <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>

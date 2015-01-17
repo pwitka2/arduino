@@ -1,5 +1,5 @@
 #include <IRremote.h>
-#define irPin 6
+#define irPin 4
 IRrecv irrecv(irPin);
 decode_results results;
  
@@ -16,7 +16,7 @@ void loop() {
    if (irrecv.decode(&results)) {
       Serial.print("0x");
       Serial.println(results.value, HEX);
-      if(results.value == 0xC26BF044)
+      /*if(results.value == 0xC26BF044)
       {
         digitalWrite(7, LOW);
         digitalWrite(10, HIGH);
@@ -26,7 +26,9 @@ void loop() {
         digitalWrite(7, HIGH);
         analogWrite(10, 50);
       }
-      delay(250);
+      */
+      //delay(250);
       irrecv.resume();
       }
+   //Serial.println(".");
 }

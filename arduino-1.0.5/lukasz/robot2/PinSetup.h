@@ -18,23 +18,23 @@
 // 11
 #define PIN_MOTOR_SPEED_B 11
 // 10
-#define PIN_SONAR_TRIGGER  10
+#define PIN_SERVO 10
 // 9
 #define PIN_MOTOR_BREAK_A 9
 // 8
 #define PIN_MOTOR_BREAK_B 8
 // 7
-#define PIN_LCDE 7
+#define PIN_IR 7
+//#define PIN_LCDE 7
 // 6
 #define PIN_SONAR_ECHO     6
 // 5
-#define PIN_SERVO 5
+#define PIN_SONAR_TRIGGER  5
 // 4
-#define PIN_IR 4
 // 3
 #define PIN_MOTOR_SPEED_A 3
 // 2
-#define PIN_LCDRS 2
+
 
 // Analog pins
 // A0 - unused
